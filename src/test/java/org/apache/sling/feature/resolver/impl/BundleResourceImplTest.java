@@ -47,6 +47,7 @@ import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -82,7 +83,9 @@ public class BundleResourceImplTest {
 
         assertEquals(0, res.getCapabilities("nonexistent").size());
         assertEquals(0, res.getRequirements("ns.2").size());
-        assertEquals(expectedCaps1, res.getCapabilities("ns.1"));
+        List<Capability> caps = res.getCapabilities("ns.1");
+        assertEquals(expectedCaps1.size(), caps.size());
+        assertTrue(expectedCaps1.containsAll(caps));
         assertEquals(expectedReqs, res.getRequirements("ns.1"));
 
         List<Capability> mergedCaps = res.getCapabilities(null);
