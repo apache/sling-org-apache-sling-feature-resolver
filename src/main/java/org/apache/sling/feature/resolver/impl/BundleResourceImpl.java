@@ -146,79 +146,17 @@ public class BundleResourceImpl extends AbstractResourceImpl implements FeatureR
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((artifact == null) ? 0 : artifact.hashCode());
-        result = prime * result + ((bsn == null) ? 0 : bsn.hashCode());
-
-        if (capabilities != null) {
-            // Don't delegate to the capabilities to compute their hashcode since that results in an endless loop
-            for (List<Capability> lc : capabilities.values()) {
-                for (Capability c : lc) {
-                    result = prime * result + c.getNamespace().hashCode();
-                    result = prime * result + c.getAttributes().hashCode();
-                    result = prime * result + c.getDirectives().hashCode();
-                }
-            }
+    public boolean equals(Object obj) {
+        if ( obj instanceof BundleResourceImpl ) {
+            return bsn.equals(((BundleResourceImpl)obj).bsn) && version.equals(((BundleResourceImpl)obj).version);
         }
-
-        if (requirements != null) {
-            // Don't delegate to the requirements to compute their hashcode since that results in an endless loop
-            for (List<Requirement> lr : requirements.values()) {
-                for (Requirement r : lr) {
-                    result = prime * result + r.getNamespace().hashCode();
-                    result = prime * result + r.getAttributes().hashCode();
-                    result = prime * result + r.getDirectives().hashCode();
-                }
-            }
-        }
-
-        result = prime * result + ((feature == null) ? 0 : feature.hashCode());
-        result = prime * result + ((version == null) ? 0 : version.hashCode());
-        return result;
+        return false;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        BundleResourceImpl other = (BundleResourceImpl) obj;
-        if (artifact == null) {
-            if (other.artifact != null)
-                return false;
-        } else if (!artifact.equals(other.artifact))
-            return false;
-        if (bsn == null) {
-            if (other.bsn != null)
-                return false;
-        } else if (!bsn.equals(other.bsn))
-            return false;
-        if (capabilities == null) {
-            if (other.capabilities != null)
-                return false;
-        } else if (!capabilities.equals(other.capabilities))
-            return false;
-        if (feature == null) {
-            if (other.feature != null)
-                return false;
-        } else if (!feature.equals(other.feature))
-            return false;
-        if (requirements == null) {
-            if (other.requirements != null)
-                return false;
-        } else if (!requirements.equals(other.requirements))
-            return false;
-        if (version == null) {
-            if (other.version != null)
-                return false;
-        } else if (!version.equals(other.version))
-            return false;
-        return true;
+    public int hashCode() {
+        return (bsn + ':' + version).hashCode();
+
     }
 
     @Override

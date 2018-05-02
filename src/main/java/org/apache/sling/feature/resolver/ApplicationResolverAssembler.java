@@ -46,7 +46,6 @@ public class ApplicationResolverAssembler {
      * @param fr
      * @return The assembled application
      * @throws IOException If a feature can't be read or no feature is found.
-     * @see #getFeatureFiles(File, String...)
      */
     public static Application assembleApplication(
             Application app,
@@ -56,8 +55,12 @@ public class ApplicationResolverAssembler {
     throws IOException {
         final List<Feature> features = new ArrayList<>();
         for(final String initFile : featureFiles) {
-            final Feature f = IOUtils.getFeature(initFile, artifactManager, SubstituteVariables.RESOLVE);
-            features.add(f);
+            try {
+                final Feature f = IOUtils.getFeature(initFile, artifactManager, SubstituteVariables.RESOLVE);
+                features.add(f);
+            } catch (Exception ex) {
+                throw new IOException("Error reading feature: " + initFile, ex);
+            }
         }
 
         return assembleApplication(app, artifactManager, fr, features.toArray(new Feature[0]));

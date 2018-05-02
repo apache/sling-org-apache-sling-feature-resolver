@@ -105,66 +105,15 @@ public class FeatureResourceImpl extends AbstractResourceImpl implements Feature
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((artifact == null) ? 0 : artifact.hashCode());
-
-        if (capabilities != null) {
-            // Don't delegate to the capabilities to compute their hashcode since that results in an endless loop
-            for (List<Capability> lc : capabilities.values()) {
-                for (Capability c : lc) {
-                    result = prime * result + c.getNamespace().hashCode();
-                    result = prime * result + c.getAttributes().hashCode();
-                    result = prime * result + c.getDirectives().hashCode();
-                }
-            }
-        }
-
-        if (requirements != null) {
-            // Don't delegate to the requirements to compute their hashcode since that results in an endless loop
-            for (List<Requirement> lr : requirements.values()) {
-                for (Requirement r : lr) {
-                    result = prime * result + r.getNamespace().hashCode();
-                    result = prime * result + r.getAttributes().hashCode();
-                    result = prime * result + r.getDirectives().hashCode();
-                }
-            }
-        }
-
-        result = prime * result + ((feature == null) ? 0 : feature.hashCode());
-        return result;
+        return feature.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        FeatureResourceImpl other = (FeatureResourceImpl) obj;
-        if (artifact == null) {
-            if (other.artifact != null)
-                return false;
-        } else if (!artifact.equals(other.artifact))
-            return false;
-        if (capabilities == null) {
-            if (other.capabilities != null)
-                return false;
-        } else if (!capabilities.equals(other.capabilities))
-            return false;
-        if (feature == null) {
-            if (other.feature != null)
-                return false;
-        } else if (!feature.equals(other.feature))
-            return false;
-        if (requirements == null) {
-            if (other.requirements != null)
-                return false;
-        } else if (!requirements.equals(other.requirements))
-            return false;
-        return true;
+        if (obj instanceof FeatureResourceImpl) {
+            return feature.equals(((FeatureResourceImpl) obj).feature);
+        }
+        return false;
     }
 
     @Override

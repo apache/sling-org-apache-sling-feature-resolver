@@ -144,14 +144,19 @@ public class FrameworkResolver implements FeatureResolver {
         Map<Feature, FeatureResource> featureMap = new HashMap<>();
         Map<FeatureResource, Feature> resourceMap = new HashMap<>();
         for (Feature f : features) {
-            FeatureResourceImpl fr = new FeatureResourceImpl(f);
-            resourceMap.put(fr, f);
-            featureMap.put(f, fr);
+            try {
+                FeatureResourceImpl fr = new FeatureResourceImpl(f);
+                resourceMap.put(fr, f);
+                featureMap.put(f, fr);
 
-            for (Artifact b : f.getBundles()) {
-                BundleDescriptor bd = getBundleDescriptor(artifactManager, b);
-                FeatureResource r = new BundleResourceImpl(bd, f);
-                resourceMap.put(r, f);
+                for (Artifact b : f.getBundles())
+                {
+                    BundleDescriptor bd = getBundleDescriptor(artifactManager, b);
+                    FeatureResource r = new BundleResourceImpl(bd, f);
+                    resourceMap.put(r, f);
+                }
+            } catch (Exception ex) {
+                throw new IOException("Error processing feature: " + f.getLocation(), ex);
             }
         }
 
