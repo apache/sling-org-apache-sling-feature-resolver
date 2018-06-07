@@ -28,7 +28,6 @@ import org.apache.sling.feature.io.IOUtils;
 import org.apache.sling.feature.io.json.FeatureJSONReader;
 import org.apache.sling.feature.io.json.FeatureJSONReader.SubstituteVariables;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -81,7 +80,7 @@ public class ApplicationResolverAssembler {
             sortedFeatures = new ArrayList<>();
             for (final FeatureResource rsrc : sortedResources) {
                 Feature f = rsrc.getFeature();
-                if (!sortedFeatures.contains(f)) {
+                if (f != null && !sortedFeatures.contains(f)) {
                     sortedFeatures.add(rsrc.getFeature());
                 }
             }
