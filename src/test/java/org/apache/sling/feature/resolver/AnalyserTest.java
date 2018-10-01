@@ -21,7 +21,7 @@ import org.apache.sling.feature.Artifact;
 import org.apache.sling.feature.Feature;
 import org.apache.sling.feature.analyser.Analyser;
 import org.apache.sling.feature.io.ArtifactManager;
-import org.apache.sling.feature.io.ArtifactManagerConfig;
+import org.apache.sling.feature.io.file.ArtifactManagerConfig;
 import org.apache.sling.feature.io.json.FeatureJSONReader;
 import org.apache.sling.feature.io.json.FeatureJSONReader.SubstituteVariables;
 import org.apache.sling.feature.scanner.BundleDescriptor;

@@ -22,9 +22,9 @@ import org.apache.sling.feature.Feature;
 import org.apache.sling.feature.builder.ApplicationBuilder;
 import org.apache.sling.feature.builder.BuilderContext;
 import org.apache.sling.feature.builder.FeatureProvider;
-import org.apache.sling.feature.io.ArtifactHandler;
 import org.apache.sling.feature.io.ArtifactManager;
 import org.apache.sling.feature.io.IOUtils;
+import org.apache.sling.feature.io.file.ArtifactHandler;
 import org.apache.sling.feature.io.json.FeatureJSONReader;
 import org.apache.sling.feature.io.json.FeatureJSONReader.SubstituteVariables;
 
