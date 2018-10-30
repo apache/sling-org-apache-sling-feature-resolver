@@ -32,7 +32,7 @@ import java.util.ServiceLoader;
 import org.apache.sling.feature.Artifact;
 import org.apache.sling.feature.ArtifactId;
 import org.apache.sling.feature.Feature;
-import org.apache.sling.feature.io.ArtifactManager;
+import org.apache.sling.feature.io.file.ArtifactManager;
 import org.apache.sling.feature.resolver.impl.BundleResourceImpl;
 import org.apache.sling.feature.resolver.impl.FeatureResourceImpl;
 import org.apache.sling.feature.resolver.impl.ResolveContextImpl;

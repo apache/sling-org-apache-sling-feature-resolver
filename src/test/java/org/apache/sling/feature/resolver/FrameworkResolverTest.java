@@ -16,18 +16,7 @@
  */
 package org.apache.sling.feature.resolver;
 
-import org.apache.sling.feature.Feature;
-import org.apache.sling.feature.io.ArtifactManager;
-import org.apache.sling.feature.io.file.ArtifactHandler;
-import org.apache.sling.feature.io.file.ArtifactManagerConfig;
-import org.apache.sling.feature.io.json.FeatureJSONReader;
-import org.apache.sling.feature.io.json.FeatureJSONReader.SubstituteVariables;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.osgi.framework.Constants;
-import org.osgi.framework.namespace.IdentityNamespace;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileReader;
@@ -39,7 +28,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
+import org.apache.sling.feature.Feature;
+import org.apache.sling.feature.io.file.ArtifactHandler;
+import org.apache.sling.feature.io.file.ArtifactManager;
+import org.apache.sling.feature.io.file.ArtifactManagerConfig;
+import org.apache.sling.feature.io.json.FeatureJSONReader;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.osgi.framework.Constants;
+import org.osgi.framework.namespace.IdentityNamespace;
 
 public class FrameworkResolverTest {
     private Path tempDir;
@@ -142,7 +141,7 @@ public class FrameworkResolverTest {
         final ArtifactHandler featureArtifact = artifactManager.getArtifactHandler(file);
 
         try (final FileReader r = new FileReader(featureArtifact.getFile())) {
-            final Feature f = FeatureJSONReader.read(r, featureArtifact.getUrl(), SubstituteVariables.RESOLVE);
+            final Feature f = FeatureJSONReader.read(r, featureArtifact.getUrl());
             return f;
         }
     }
