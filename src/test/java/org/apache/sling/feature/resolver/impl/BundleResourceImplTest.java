@@ -38,6 +38,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -191,7 +192,7 @@ public class BundleResourceImplTest {
 
     private File createBundle(String manifest) throws IOException
     {
-        File f = File.createTempFile("bundle", ".jar");
+        File f = Files.createTempFile("bundle", ".jar").toFile();
         f.deleteOnExit();
         Manifest mf = new Manifest(new ByteArrayInputStream(manifest.getBytes("UTF-8")));
         mf.getMainAttributes().putValue("Manifest-Version", "1.0");
